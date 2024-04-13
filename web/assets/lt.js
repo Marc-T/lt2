@@ -10,6 +10,7 @@ let id = urlSearchParams.get("id");
 id = id ? id : config.defaultId;
 
 let lastUpdate = 0;
+let datahistory;
 
 polster();
 
@@ -33,6 +34,9 @@ async function polster() {
       });
 
       let session = document.querySelector("lt-session");
+
+      computehistory(data);
+
       session.data = data;
    
       let themeToggleElement = document.querySelector("lt-theme-toggle");
@@ -44,4 +48,41 @@ async function polster() {
          classList.add(clazz);
       });
    }
+}
+
+async function computehistory(data)
+{      
+      Object.entries(data.rider).forEach(([keydata, valuedata]) => {
+         valuedata.history = [];
+
+         if (datahistory != undefined)
+         {
+            Object.entries(datahistory.rider).forEach(([keyhistory, valuehistory]) => {
+               if (valuedata.rider_id == valuehistory.rider_id)
+               {
+                  valuedata.history = valuehistory.history;
+               }
+            });
+         }
+
+         let exist = false;
+
+         valuedata.formathistory  = "";
+         Object.entries(valuedata.history).forEach(([keyhistory, valuehistory]) => {
+            if (valuehistory.num_lap == valuedata.last_lap)
+            {
+               exist = true;
+            }
+            valuedata.formathistory += valuehistory.num_lap + " : " + valuehistory.lap_time + " <br>";
+         });
+
+         if (!exist)         
+         {
+            valuedata.history.push({"num_lap":valuedata.last_lap,"lap_time":valuedata.last_lap_time});
+            valuedata.formathistory += valuedata.last_lap + " : " + valuedata.last_lap_time + " <br>";
+         }
+
+      });
+
+      datahistory = data;
 }

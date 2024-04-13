@@ -25,6 +25,7 @@ lt-race-row {
          <th>Last Lap</th>
          <th>Laps</th>
          <th>Status</th>
+         <th>History</th>
       </tr>
    </thead>
    <tbody>

@@ -28,6 +28,7 @@ lt-table-row {
    <th>Last Lap</th>
    <th>Laps</th>
    <th>On Track</th>
+   <th>History</th>
 </thead>
 <tbody>
 </tbody>

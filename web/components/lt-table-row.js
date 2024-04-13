@@ -75,11 +75,12 @@ template.innerHTML = `
 <td class="fixed-width num last_lap_time"></td>
 <td class="fixed-width num last_lap"></td>
 <td style="text-align: center;" class="on_pit"></td>
+<td style="width: 9em;" class="formathistory"></td>
 `; 
 
 export default class TableRowElement extends HTMLElement {
    static get observedAttributes() { return ['position', 'rider_number', 'rider_name', 'rider_surname', 'num_lap', 'on_pit', 
-               'number', 'lap_time', 'gap_first', 'gap_prev', 'last_lap_time', 'last_lap', 'status_name']; }
+               'number', 'lap_time', 'gap_first', 'gap_prev', 'last_lap_time', 'last_lap', 'status_name','formathistory']; }
 
    $(selector) {
       return this.shadowRoot && this.shadowRoot.querySelector(selector);
